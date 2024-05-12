@@ -185,9 +185,9 @@ router.get("/movies", async (req, res) => {
         const search = req.query.search || "";
         let sort = req.query.sort || "rating";
         let genre = req.query.genre || "All";
-        let year = req.query.year || "All";
+        let year = req.query.year || "Bll";
         let rating = req.query.rating || "All";
-        let age_rating = req.query.age_rating || "All";
+        // let age_rating = req.query.age_rating || "All";
 
         // console.log('Year   ',year);
 
@@ -210,7 +210,7 @@ router.get("/movies", async (req, res) => {
         // Tạo mảng các rating từ dữ liệu
         const ratingOptions = [];
 
-        const ageRatingOptions = [];
+        // const ageRatingOptions = ["All", "U", "UA", "A", "UA7", "S", "UA13", "UA16", "UA18"];
 
         genre === "All"
             ? (genre = [...genreOptions])
@@ -232,7 +232,7 @@ router.get("/movies", async (req, res) => {
             // age_rating: { $in: [...age_rating] }
         };
         // console.log('Year   ',year);
-        if (year !== "All") {
+        if (year !== "Bll") {
 
             filterOptions.year = year;
             
@@ -246,9 +246,9 @@ router.get("/movies", async (req, res) => {
             filterOptions.rating = rating;
         }
 
-        if (age_rating!== "All") {
-            filterOptions.age_rating = age_rating;
-        }
+        // if (age_rating!== "All") {
+        //     filterOptions.age_rating = age_rating;
+        // }
 
 
         const movies = await Movie.find(filterOptions)
@@ -268,7 +268,7 @@ router.get("/movies", async (req, res) => {
             genres: genreOptions,
             years: yearOptions,
             rating: ratingOptions,
-            age_rating: ageRatingOptions,
+            // age_rating: ageRatingOptions,
             movies,
         };
         console.log("Filter Options:", filterOptions);
